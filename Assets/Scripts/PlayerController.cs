@@ -66,7 +66,11 @@ public class PlayerController : MonoBehaviour
 
     void Fire()
     {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        Debug.Log("fired");
+        GameObject bullet = PlayerBulletPool.PlayerBulletPoolInstance.GetBullet();
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = Quaternion.identity;
+        bullet.SetActive(true);
         fireTimer.Run();
     }
 }

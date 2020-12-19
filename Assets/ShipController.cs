@@ -27,7 +27,7 @@ public class ShipController : MonoBehaviour
             {
                 DestroyShip();
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 
