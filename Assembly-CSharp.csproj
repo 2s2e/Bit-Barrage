@@ -63,11 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PlayerBulletController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ScreenUtils.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\ShipController.cs" />
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>C:/Users/steve/OneDrive/Desktop/Bits and Pieces/Test Run/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
