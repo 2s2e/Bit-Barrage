@@ -12,4 +12,8 @@ public static class GlobalVariables
     public static List<List<Sprite>> bossParts;
     public static GameObject player;
     public static int level = 1;
+    public static int graze = 0;
+    public static int wave = 0;
+    public static bool attackFinished = false;
+    public static int score = 0;
 }

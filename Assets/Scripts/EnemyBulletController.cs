@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBulletController : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 3f + 0.1f * GlobalVariables.level;
     Vector3 movement;
     // Start is called before the first frame update
     void Start()
@@ -22,10 +22,13 @@ public class EnemyBulletController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         gameObject.SetActive(false);
-    }
+        float speed = 3f + 0.1f * GlobalVariables.level;
+}
 
     private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
+        float speed = 3f + 0.1f * GlobalVariables.level;
     }
+
 }

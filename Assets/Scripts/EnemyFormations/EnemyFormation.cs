@@ -25,7 +25,7 @@ public class EnemyFormation : MonoBehaviour
         enemies = new List<GameObject>();
         BoxCollider2D col = enemy.GetComponent<BoxCollider2D>();
         enemyHeight = col.size.y;
-        enemyWidth = col.size.x;
+        enemyWidth = col.size.x / 2;
         if(formation == 0)
         {
             Linear();
@@ -40,6 +40,39 @@ public class EnemyFormation : MonoBehaviour
         }
     }
 
+    IEnumerator attackCycle()
+    {
+        
+        while(true)
+        {
+            GlobalVariables.attackFinished = false;
+            int ind = Random.Range(0, BasicAttackPatterns.attacks.Length);
+            int numBullets = 5 + Mathf.FloorToInt(GlobalVariables.level * 0.8f) + Random.Range(-2,3);
+            //enemy color
+            int repeat = Random.Range(3, 10);
+            int spriteNum = Random.Range(0, BasicAttackPatterns.bulletTypes);
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                GameObject cur = transform.GetChild(i).gameObject;
+                cur.GetComponent<ShipController>().Attack(ind, numBullets, enemyColor, repeat, spriteNum);
+                Debug.Log("Attacked");
+            }
+            while(!GlobalVariables.attackFinished)
+            {
+                yield return new WaitForSeconds(1);
+            }
+            yield return new WaitUntil(checkWait);
+            yield return new WaitForSeconds(0.5f);
+            //yield return new WaitForSeconds(1);
+        }
+        
+    }
+
+    bool checkWait()
+    {
+        return GlobalVariables.attackFinished;
+    }
+
     private void Update()
     {
         if(transform.position.x + width/2f > ScreenUtils.ScreenRight || transform.position.x - width / 2f < ScreenUtils.ScreenLeft)
@@ -47,15 +80,24 @@ public class EnemyFormation : MonoBehaviour
             dir *= -1;
         }
         transform.Translate(Vector3.right * dir * speed * Time.deltaTime);
-        if(width != 0 && enemies.Count == 0)
+        Debug.Log(width);
+        Debug.Log(enemies.Count);
+        if(width != 0 && transform.childCount == 0)
         {
+            GlobalVariables.attackFinished = false;
+            StopCoroutine("attackCycle");
             Destroy(gameObject);
         }
     }
-
+    /*
+     BasicAttackPatterns.BasicAttackPatternsInstance.BasicAttack(0, transform.rotation.z - 180,
+            5, Color.red, 3, 1, gameObject);
+     */
     void Linear()
     {
-        if(((float)numEnemies * 2f - 1f) * enemyWidth > screenWidth)
+        Debug.Log(enemyColor);
+        screenWidth = Mathf.Abs(ScreenUtils.ScreenRight - ScreenUtils.ScreenLeft);
+        if (((float)numEnemies * enemyWidth + ((float)numEnemies - 1) * (enemyWidth / 2) > screenWidth))
         {
             numEnemies = Mathf.FloorToInt((screenWidth + enemyWidth * 0.5f) / (enemyWidth * 1.5f));
         }
@@ -64,16 +106,18 @@ public class EnemyFormation : MonoBehaviour
         width = (float)numEnemies * enemyWidth + ((float)numEnemies - 1) * 0.5f * enemyWidth;
         Debug.Log(width);
         transform.position = new Vector3(0, transform.position.y,0);
-        float start = width / 2f + enemyWidth / 2;
+        float start = width / 2f - enemyWidth / 2;
         for(int i = 0; i < numEnemies; i++)
         {
             GameObject tempShip = Instantiate(enemy, transform, true);
             tempShip.transform.position = new Vector3(-start + enemyWidth * 1.5f * i, transform.position.y, 0);
             tempShip.GetComponent<SpriteRenderer>().color = enemyColor;
+            tempShip.GetComponent<ShipController>().color = enemyColor;
             enemies.Add(tempShip);
         }
+        StartCoroutine("attackCycle");
     }
-
+    
     void ZigZag()
     {
 
