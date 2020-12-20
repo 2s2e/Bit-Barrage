@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    [SerializeField]
-    float health = 3;
+    public float health = 3;
+    public Color color;
     // Start is called before the first frame update
     void Start()
     {
-        
+        BasicAttackPatterns.BasicAttackPatternsInstance.BasicAttack(1, transform.rotation.z - 180,
+            5, Color.red, 3, 2, gameObject);
+
+        Debug.Log(Mathf.Atan((GlobalVariables.player.transform.position.x - transform.position.x) / (GlobalVariables.player.transform.position.y - transform.position.y)) * Mathf.Rad2Deg);
     }
 
     // Update is called once per frame

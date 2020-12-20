@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour
         scaledSpeed = speed * (0.5f + GlobalVariables.mouseSensitivity);
         fireTimer = gameObject.AddComponent<Timer>();
         fireTimer.Duration = 0.2f;
+    }
 
+    private void Awake()
+    {
+        GlobalVariables.player = gameObject;
     }
 
     // Update is called once per frame
@@ -62,6 +66,8 @@ public class PlayerController : MonoBehaviour
                 Fire();
             }
         }
+
+        
     }
 
     void Fire()
