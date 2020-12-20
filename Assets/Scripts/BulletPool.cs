@@ -24,6 +24,10 @@ public class BulletPool : MonoBehaviour
 
     public GameObject GetBullet()
     {
+        if(bullets == null)
+        {
+            bullets = new List<GameObject>();
+        }
         if(bullets.Count > 0)
         {
             for(int i = 0; i < bullets.Count; i++)

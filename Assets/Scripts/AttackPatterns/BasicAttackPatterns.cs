@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicAttackPatterns : MonoBehaviour
 {
     public static BasicAttackPatterns BasicAttackPatternsInstance;
-
+    readonly static BulletPool[] bulletPools; 
     private void Awake()
     {
         BasicAttackPatternsInstance = this;
@@ -33,13 +33,38 @@ public class BasicAttackPatterns : MonoBehaviour
         {
             for (int j = 0; j < numBullets; j++)
             {
-                bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
-                bullet.transform.position = ship.transform.position;
-                bullet.transform.eulerAngles = new Vector3(0, 0, start + angleInc * j);
-                sr = bullet.GetComponent<SpriteRenderer>();
-                sr.color = color;
-                sr.sprite = GlobalVariables.enemyBulletSprites[spriteNum];
-                bullet.SetActive(true);
+                try
+                {
+                    if(ship != null)
+                    {
+                        if (spriteNum == 0)
+                        {
+                            bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
+                        }
+                        else if (spriteNum == 1)
+                        {
+                            bullet = EnemyBulletTwoPool.EnemyBulletPoolInstance.GetBullet();
+                        }
+                        else if (spriteNum == 2)
+                        {
+                            bullet = EnemyBulletThreePool.EnemyBulletPoolInstance.GetBullet();
+                        }
+                        else
+                        {
+                            bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
+                        }
+                        bullet.transform.position = ship.transform.position;
+                        bullet.transform.eulerAngles = new Vector3(0, 0, start + angleInc * j);
+                        sr = bullet.GetComponent<SpriteRenderer>();
+                        sr.color = color;
+                        bullet.SetActive(true);
+                    }
+                    
+                }
+                finally
+                {
+
+                }
             }
             yield return new WaitForSeconds(1);
         }
@@ -52,18 +77,43 @@ public class BasicAttackPatterns : MonoBehaviour
         {
             for (int j = 0; j < numBullets; j++)
             {
-                bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
-                bullet.transform.position = ship.transform.position;
-                Vector3 targetDir = GlobalVariables.player.transform.position - ship.transform.position;
-                float angle = Mathf.Atan(-(GlobalVariables.player.transform.position.x - ship.transform.position.x) / (GlobalVariables.player.transform.position.y - ship.transform.position.y)) * Mathf.Rad2Deg - 180;
-                Debug.Log(angle);
-                bullet.transform.eulerAngles = new Vector3(0, 0, angle);
-                
-                sr = bullet.GetComponent<SpriteRenderer>();
-                sr.color = color;
-                sr.sprite = GlobalVariables.enemyBulletSprites[spriteNum];
-                bullet.SetActive(true);
-                yield return new WaitForSeconds(0.2f);
+                try
+                {
+
+                    //bullet = bulletPools[spriteNum].GetBullet();
+                    if(spriteNum == 0)
+                    {
+                        bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
+                    }
+                    else if(spriteNum == 1)
+                    {
+                        bullet = EnemyBulletTwoPool.EnemyBulletPoolInstance.GetBullet();
+                    }
+                    else if(spriteNum == 2)
+                    {
+                        bullet = EnemyBulletThreePool.EnemyBulletPoolInstance.GetBullet();
+                    }
+                    else
+                    {
+                        bullet = EnemyBulletPool.EnemyBulletPoolInstance.GetBullet();
+                    }
+                    if (ship != null) {
+                        bullet.transform.position = ship.transform.position;
+                        Vector3 targetDir = GlobalVariables.player.transform.position - ship.transform.position;
+                        float angle = Mathf.Atan(-(GlobalVariables.player.transform.position.x - ship.transform.position.x) / (GlobalVariables.player.transform.position.y - ship.transform.position.y)) * Mathf.Rad2Deg - 180;
+                        Debug.Log(angle);
+                        bullet.transform.eulerAngles = new Vector3(0, 0, angle);
+                        sr = bullet.GetComponent<SpriteRenderer>();
+                        sr.color = color;
+                        bullet.SetActive(true);
+                        yield return new WaitForSeconds(0.2f);
+                    }
+                    
+                }
+                finally
+                {
+
+                }
             }
             yield return new WaitForSeconds(1);
         }

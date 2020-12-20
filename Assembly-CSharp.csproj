@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\BulletPool.cs" />
     <Compile Include="Assets\Scripts\EnemyBulletController.cs" />
     <Compile Include="Assets\Scripts\EnemyBulletPool.cs" />
+    <Compile Include="Assets\Scripts\EnemyBulletThreePool.cs" />
+    <Compile Include="Assets\Scripts\EnemyBulletTwoPool.cs" />
     <Compile Include="Assets\Scripts\EnemyFormations\EnemyFormation.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />

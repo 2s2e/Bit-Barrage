@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3371218536530567059
+--- !u!1 &1671849112189540919
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,36 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3371218536530567084}
-  - component: {fileID: 3371218536530567085}
+  - component: {fileID: 4922158041358757064}
+  - component: {fileID: 7273968747503499010}
   m_Layer: 0
-  m_Name: SpaceShipPart05 (1)
+  m_Name: SpaceShipPart05 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3371218536530567084
+--- !u!4 &4922158041358757064
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3371218536530567059}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.324, y: 0.969, z: -0.29597497}
-  m_LocalScale: {x: 5.5340557, y: 7.2439733, z: 1}
+  m_GameObject: {fileID: 1671849112189540919}
+  m_LocalRotation: {x: -0, y: -0.9991082, z: -0, w: 0.04222352}
+  m_LocalPosition: {x: 1.29, y: 0.962, z: -0.464}
+  m_LocalScale: {x: -6.434183, y: 7.471077, z: 1}
   m_Children: []
   m_Father: {fileID: 3371218536991035159}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3371218536530567085
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -175.16, z: 0}
+--- !u!212 &7273968747503499010
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3371218536530567059}
+  m_GameObject: {fileID: 1671849112189540919}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 7.8325415, y: 7.1137333, z: 1.0565}
   m_Children: []
   m_Father: {fileID: 3371218536991035159}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3371218536840646454
 SpriteRenderer:
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3371218536991035159}
   m_Layer: 0
-  m_Name: enemyship02
+  m_Name: BossShip01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,8 +265,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3371218536824545457}
-  - {fileID: 3371218536530567084}
   - {fileID: 3371218536840646453}
+  - {fileID: 4922158041358757064}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

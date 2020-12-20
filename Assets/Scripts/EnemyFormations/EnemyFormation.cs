@@ -22,6 +22,7 @@ public class EnemyFormation : MonoBehaviour
     float dir = 1;
     private void Start()
     {
+        enemies = new List<GameObject>();
         BoxCollider2D col = enemy.GetComponent<BoxCollider2D>();
         enemyHeight = col.size.y;
         enemyWidth = col.size.x;
@@ -58,7 +59,10 @@ public class EnemyFormation : MonoBehaviour
         {
             numEnemies = Mathf.FloorToInt((screenWidth + enemyWidth * 0.5f) / (enemyWidth * 1.5f));
         }
+        Debug.Log(enemyWidth);
+        Debug.Log(screenWidth);
         width = (float)numEnemies * enemyWidth + ((float)numEnemies - 1) * 0.5f * enemyWidth;
+        Debug.Log(width);
         transform.position = new Vector3(0, transform.position.y,0);
         float start = width / 2f + enemyWidth / 2;
         for(int i = 0; i < numEnemies; i++)
