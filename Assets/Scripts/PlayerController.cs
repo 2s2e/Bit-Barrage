@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         halfHeight = dimensions.size.y / 2;
         scaledSpeed = speed * (0.5f + GlobalVariables.mouseSensitivity * 2);
         fireTimer = gameObject.AddComponent<Timer>();
-        fireTimer.Duration = 0.2f;
+        fireTimer.Duration = 0.1f;
 
         healthText.text = "HP: " + health;
         grazeText.text = "Graze: " + GlobalVariables.graze.ToString();
