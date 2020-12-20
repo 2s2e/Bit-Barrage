@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     float halfWidth;
     float halfHeight;
     Timer fireTimer;
+    SpriteRenderer spriteRenderer;
 
     [SerializeField]
     float speed = 20;
@@ -46,12 +47,15 @@ public class PlayerController : MonoBehaviour
     float scaledSpeed;
 
     Timer cooldownTimer;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         graze = GetComponent<PolygonCollider2D>();
         cooldownTimer = gameObject.AddComponent<Timer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         halfWidth = dimensions.size.x / 2;
         halfHeight = dimensions.size.y / 2;
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         levelText.text = "Level: " + GlobalVariables.level.ToString();
         scoreText.text = "Score: " + GlobalVariables.score.ToString();
         cooldownTimer.Duration = 1f;
+        spriteRenderer.color = Color.white;
     }
 
     private void Awake()
@@ -102,7 +107,10 @@ public class PlayerController : MonoBehaviour
 
         levelText.text = "Level: " + GlobalVariables.level.ToString();
         scoreText.text = "Score: " + GlobalVariables.score.ToString();
-
+        if(cooldownTimer.Finished)
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 
     void Fire()
@@ -124,10 +132,11 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.SetActive(false);
+
         Debug.Log("hit");
         if (!cooldownTimer.Running)
         {
+            FindObjectOfType<AudioManager>().Play("PlayerHit");
             health--;
             if (health <= 0)
             {
@@ -136,6 +145,7 @@ public class PlayerController : MonoBehaviour
             }
             healthText.text = "HP: " + health;
             cooldownTimer.Run();
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

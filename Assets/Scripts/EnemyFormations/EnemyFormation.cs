@@ -80,8 +80,8 @@ public class EnemyFormation : MonoBehaviour
             dir *= -1;
         }
         transform.Translate(Vector3.right * dir * speed * Time.deltaTime);
-        Debug.Log(width);
-        Debug.Log(enemies.Count);
+        //Debug.Log(width);
+        //Debug.Log(enemies.Count);
         if(width != 0 && transform.childCount == 0)
         {
             GlobalVariables.attackFinished = false;
@@ -95,16 +95,16 @@ public class EnemyFormation : MonoBehaviour
      */
     void Linear()
     {
-        Debug.Log(enemyColor);
+        //Debug.Log(enemyColor);
         screenWidth = Mathf.Abs(ScreenUtils.ScreenRight - ScreenUtils.ScreenLeft);
         if (((float)numEnemies * enemyWidth + ((float)numEnemies - 1) * (enemyWidth / 2) > screenWidth))
         {
             numEnemies = Mathf.FloorToInt((screenWidth + enemyWidth * 0.5f) / (enemyWidth * 1.5f));
         }
-        Debug.Log(enemyWidth);
-        Debug.Log(screenWidth);
+        //Debug.Log(enemyWidth);
+        //Debug.Log(screenWidth);
         width = (float)numEnemies * enemyWidth + ((float)numEnemies - 1) * 0.5f * enemyWidth;
-        Debug.Log(width);
+        //Debug.Log(width);
         transform.position = new Vector3(0, transform.position.y,0);
         float start = width / 2f - enemyWidth / 2;
         for(int i = 0; i < numEnemies; i++)

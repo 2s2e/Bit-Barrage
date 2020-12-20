@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using System;
 using UnityEngine.Audio;
 
@@ -34,9 +36,19 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Start() {
-        Play("Background");
+            
+        StartCoroutine(playBackgroundMusic());
+
     }
 
+    IEnumerator playBackgroundMusic() {
+        Debug.Log("Happened");
+        Play("Background");
+        yield return new WaitWhile(() => Array.Find(sounds, sound => sound.name == "Background").source.isPlaying);
+        Play("Touhou");
+        Debug.Log("Ended");
+        
+    }
     public void Play(string name) {
         //Look at sounds array, find the first sound object that matches the requirement of sound.name == name
         Sound s = Array.Find(sounds, sound => sound.name == name);

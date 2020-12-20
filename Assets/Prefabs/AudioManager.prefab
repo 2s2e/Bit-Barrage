@@ -64,3 +64,13 @@ MonoBehaviour:
     volume: 0.197
     pitch: 1
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: cc19e1cfef8c6b747be5efcf6de240cb, type: 3}
+    name: MenuClick
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8709e263c5172a54c80a8d23370cd44f, type: 3}
+    name: PlayerHit
+    volume: 0.682
+    pitch: 2.22
+    source: {fileID: 0}

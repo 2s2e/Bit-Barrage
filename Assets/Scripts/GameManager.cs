@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
             newWave(0);
             StartCoroutine("level");
             GlobalVariables.score = 0;
+            GlobalVariables.graze = 0;
         }
         else
         {
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
     public void setMouseSensitivity(Slider s)
     {
         GlobalVariables.mouseSensitivity = s.value;
-        Debug.Log(s.value);
+        //Debug.Log(s.value);
     }
     public void newWave(int formation)
     {

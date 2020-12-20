@@ -6,36 +6,40 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Canvas mainMenu;
-    public Canvas settingsMenu;
-    public Canvas helpMenu;
+    public GameObject mainMenu;
+    public GameObject settingsMenu;
+    public GameObject helpMenu;
     public Texture2D empty;
 
     public Text highScore;
 
     public void ChangeToSettings()
     {
-        mainMenu.enabled = false;
-        settingsMenu.enabled = true;
-        helpMenu.enabled = false;
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+        helpMenu.SetActive(false);
+        FindObjectOfType<AudioManager>().Play("MenuClick");
     }
 
     public void ChangeToMain()
     {
-        mainMenu.enabled = true;
-        settingsMenu.enabled = false;
-        helpMenu.enabled = false;
+        mainMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+        helpMenu.SetActive(false);
+        FindObjectOfType<AudioManager>().Play("MenuClick");
     }
     public void ChangeToHelp() {
-        mainMenu.enabled = false;
-        settingsMenu.enabled = false;
-        helpMenu.enabled = true;
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+        helpMenu.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("MenuClick");
     }
     public void StartGame()
     {
         ChangeToMain();
         Cursor.visible = false;
         SceneManager.LoadScene(sceneName: "Main");
+        FindObjectOfType<AudioManager>().Play("MenuClick");
     }
 
     public void ResetHighScore()
@@ -44,8 +48,12 @@ public class MainMenu : MonoBehaviour
         //highScore = GameObject.FindGameObjectWithTag("HighScore").GetComponent<Text>();
         highScore.text = "High Score: " + PlayerPrefs.GetInt("HS", 0);
     }
-   
     
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void SetVolume(Slider s)
     {
         AudioListener.volume = s.value;

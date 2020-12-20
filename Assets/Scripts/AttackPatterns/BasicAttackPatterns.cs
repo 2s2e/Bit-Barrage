@@ -31,8 +31,9 @@ public class BasicAttackPatterns : MonoBehaviour
     }
     public IEnumerator Trident(float generalDirection, int numBullets, Color color, int repeat, int spriteNum, GameObject ship)
     {
-        float angleInc = 60f / (numBullets - 1);
-        float start = generalDirection - 30f;
+        numBullets = Mathf.FloorToInt(numBullets - GlobalVariables.level * 0.4f);
+        float angleInc = Mathf.Max(120f, (60f + 5f * GlobalVariables.level)) / (numBullets - 1);
+        float start = generalDirection - Mathf.Max(120f, (60f + 5f * GlobalVariables.level)) / 2f;
         GameObject bullet;
         SpriteRenderer sr;
         for (int i = 0; i < repeat; i++)
@@ -109,7 +110,11 @@ public class BasicAttackPatterns : MonoBehaviour
                         bullet.transform.position = ship.transform.position;
                         Vector3 targetDir = GlobalVariables.player.transform.position - ship.transform.position;
                         float angle = Mathf.Atan(-(GlobalVariables.player.transform.position.x - ship.transform.position.x) / (GlobalVariables.player.transform.position.y - ship.transform.position.y)) * Mathf.Rad2Deg - 180;
-                        Debug.Log(angle);
+                        //Debug.Log(angle);
+                        if(GlobalVariables.player.transform.position.y > ship.transform.position.y)
+                        {
+                            angle += 180;
+                        }
                         bullet.transform.eulerAngles = new Vector3(0, 0, angle);
                         sr = bullet.GetComponent<SpriteRenderer>();
                         sr.color = color;
